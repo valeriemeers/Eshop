@@ -6,6 +6,13 @@ public class Product {
     private double price;
     private int stock;
 
+    public Product(long id, String productName, double price, int stock) {
+        this.id = id;
+        this.productName = productName;
+        this.price = price;
+        this.stock = stock;
+    }
+
     public long getId() {
         return id;
     }
@@ -36,5 +43,15 @@ public class Product {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", productName='" + productName + '\'' +
+                ", price=" + price +
+                ", stock=" + stock +
+                '}';
     }
 }

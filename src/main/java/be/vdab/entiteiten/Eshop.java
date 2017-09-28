@@ -5,11 +5,11 @@ public class Eshop {
     private String info;
     private String address;
 
-    public Eshop(int id, String address) {
+    public Eshop(long id, String address) {
         this(id, null, address);
     }
 
-    public Eshop(int id, String info, String address) {
+    public Eshop(long id, String info, String address) {
         this.id = id;
         this.info = info;
         this.address = address;

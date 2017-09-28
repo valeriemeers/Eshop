@@ -7,27 +7,60 @@ import java.util.List;
 public class Order {
     private long id;
     private String payMethod;
-    private int orderTotal;
+    private double orderTotal;
     private Date date;
-    //customerId
-    //eshopId
+    private long customerId;
+    private long eShopId;
+    private double amount;
+    private long productId;
 
-    private List<OrderDetail> details;
+    public Order(){
 
-    public void addOrderDetail(OrderDetail orderDetail) {
-        if (details == null) {
-            details = new ArrayList<OrderDetail>();
-        }
-        details.add(orderDetail);
     }
 
-    public List<OrderDetail> getDetails() {
-        return details;
+    public Order(String payMethod, double orderTotal, Date date, long customerId, long eShopId, double amount, long productId) {
+        this.payMethod = payMethod;
+        this.orderTotal = orderTotal;
+        this.date = date;
+        this.customerId = customerId;
+        this.eShopId = eShopId;
+        this.amount = amount;
+        this.productId = productId;
     }
 
-    public void setDetails(List<OrderDetail> details) {
-        this.details = details;
+    public Order(long id, String payMethod, double orderTotal, Date date, long customerId, long eShopId) {
+        this.id = id;
+        this.payMethod = payMethod;
+        this.orderTotal = orderTotal;
+        this.date = date;
+        this.customerId = customerId;
+        this.eShopId = eShopId;
     }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public long getProductId() {
+        return productId;
+    }
+
+    public void setProductId(long productId) {
+        this.productId = productId;
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public long geteShopId() {
+        return eShopId;
+    }
+
 
     public long getId() {
         return id;
@@ -45,7 +78,7 @@ public class Order {
         this.payMethod = payMethod;
     }
 
-    public int getOrderTotal() {
+    public double getOrderTotal() {
         return orderTotal;
     }
 
@@ -59,5 +92,10 @@ public class Order {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "orderId: "+ getId() +"\npayment method: "+ getPayMethod() +"\norder total: "+ getOrderTotal() +"\ndate: "+ getDate() +"\ncustomerId: "+ getCustomerId() +"\neshopId: "+ geteShopId();
     }
 }

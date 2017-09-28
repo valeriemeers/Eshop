@@ -1,17 +1,18 @@
 package be.vdab.entiteiten;
 
-public class OrderDetail {
+public class OrderDetail  {
     private long id;
-    private int amount;
-    private long orderId;
-    private Product product;
+    private double amount;
+    private long productId;
 
-    public Product getProduct() {
-        return product;
+    public OrderDetail(long id, double amount, long productId) {
+        this.id = id;
+        this.amount = amount;
+        this.productId = productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public long getProductId() {
+        return productId;
     }
 
     public long getId() {
@@ -22,19 +23,7 @@ public class OrderDetail {
         this.id = id;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(long orderId) {
-        this.orderId = orderId;
     }
 }

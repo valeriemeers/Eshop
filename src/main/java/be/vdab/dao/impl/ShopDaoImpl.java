@@ -1,28 +1,41 @@
 package be.vdab.dao.impl;
 
 import be.vdab.dao.ShopDao;
+import be.vdab.entiteiten.Customer;
 import be.vdab.entiteiten.Eshop;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopDaoImpl extends BaseDao implements ShopDao{
+public class ShopDaoImpl implements ShopDao{
 
     public List<Eshop> listAllShops() {
-        String SELECT_ALL_SHOPS = "select * from eshop";
-        try {
-            ResultSet resultSet = connection.createStatement().executeQuery(SELECT_ALL_SHOPS);
-            List<Eshop> listShops = new ArrayList<>();
-            while (resultSet.next()){
-                listShops.add(new Eshop(resultSet.getInt("id"), resultSet.getString("info"), resultSet.getString("address")));
-            }
-            return listShops;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        String SQL = "select * from eshop";
+        return EshopSQL(SQL);
     }
+
+    private List<Eshop> EshopSQL(String SQL) {
+        List<Eshop> eshopList;  //lokale variabele om geen 'state' bij te houden. Deze klasse is nu thread-safe(r).
+
+        eshopList = new ArrayList<>();
+        try (Connection connection = ConnectionDao.getConnection();
+             Statement statement = connection.createStatement()) {
+            ResultSet rs = statement.executeQuery(SQL);
+            while (rs.next()) {
+
+                long id = rs.getInt(1);
+                String info = rs.getString(2);
+                String address = rs.getString(3);
+
+                Eshop shop = new Eshop (id, info, address);
+                eshopList.add(shop);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return eshopList;
+    }
+
 }
